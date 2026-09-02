@@ -22,41 +22,14 @@ macro_rules! config_default_impl {
     };
 }
 
-impl ConfigDefault for ConnectionTimeout {
-    fn get_default() -> Self {
-        ConnectionTimeout(10)
-    }
-}
-impl ConfigDefault for MaxConnections {
-    fn get_default() -> Self {
-        MaxConnections(100)
-    }
-}
-impl ConfigDefault for RetryAttempts {
-    fn get_default() -> Self {
-        RetryAttempts(3)
-    }
-}
-impl ConfigDefault for PostgresPort {
-    fn get_default() -> Self {
-        PostgresPort(5432)
-    }
-}
-impl ConfigDefault for MySQLPort {
-    fn get_default() -> Self {
-        MySQLPort(3306)
-    }
-}
-impl ConfigDefault for MongoPort {
-    fn get_default() -> Self {
-        MongoPort(27017)
-    }
-}
-impl ConfigDefault for RedisPort {
-    fn get_default() -> Self {
-        RedisPort(6379)
-    }
-}
+config_default_impl!(ConnectionTimeout, 30);
+config_default_impl!(MaxConnections, 100);
+config_default_impl!(RetryAttempts, 3);
+config_default_impl!(PostgresPort, 5432);
+config_default_impl!(MySQLPort, 3306);
+config_default_impl!(MongoPort, 27017);
+config_default_impl!(RedisPort, 6379);
+
 // Example usage
 pub fn main() {
     // let's say we have a new struct
