@@ -1,0 +1,74 @@
+use std::collections::HashSet;
+
+/// Returns a HashSet containing only the unique elements from the input slice.
+pub fn unique_elements(items: &[i32]) -> HashSet<i32> {
+    items.iter().copied().collect()
+}
+
+/// Returns the count of unique elements in the input slice.
+pub fn count_unique(items: &[i32]) -> usize {
+    unique_elements(items).len()
+}
+
+/// Returns elements that appear in both sets (intersection).
+pub fn find_common(set1: &HashSet<i32>, set2: &HashSet<i32>) -> HashSet<i32> {
+    set1.intersection(set2).copied().collect()
+}
+
+/// Returns elements that appear in either set (union).
+pub fn find_all(set1: &HashSet<i32>, set2: &HashSet<i32>) -> HashSet<i32> {
+    set1.union(set2).copied().collect()
+}
+
+/// Returns elements in set1 that are not in set2 (difference).
+pub fn find_difference(set1: &HashSet<i32>, set2: &HashSet<i32>) -> HashSet<i32> {
+    set1.difference(set2).copied().collect()
+}
+
+/// Returns elements that are in exactly one of the sets (symmetric difference).
+pub fn find_symmetric_difference(set1: &HashSet<i32>, set2: &HashSet<i32>) -> HashSet<i32> {
+    set1.symmetric_difference(set2).copied().collect()
+}
+
+/// Checks if all elements of potential_subset are contained in potential_superset.
+pub fn is_subset(potential_subset: &HashSet<i32>, potential_superset: &HashSet<i32>) -> bool {
+    potential_subset.is_subset(potential_superset)
+}
+
+pub fn main() {
+    // Example: unique_elements
+    let items = vec![1, 2, 3, 2, 1, 4, 3];
+    let unique = unique_elements(&items);
+    println!("Unique elements: {:?}", unique);
+
+    // Example: count_unique
+    let count = count_unique(&[1, 2, 2, 3, 3, 3]);
+    println!("Count of unique elements: {}", count);
+
+    // Example: set operations
+    let set1 = HashSet::from([1, 2, 3]);
+    let set2 = HashSet::from([2, 3, 4]);
+
+    println!("Set 1: {:?}", set1);
+    println!("Set 2: {:?}", set2);
+    println!("Intersection: {:?}", find_common(&set1, &set2));
+    println!("Union: {:?}", find_all(&set1, &set2));
+    println!(
+        "Difference (set1 - set2): {:?}",
+        find_difference(&set1, &set2)
+    );
+    println!(
+        "Symmetric difference: {:?}",
+        find_symmetric_difference(&set1, &set2)
+    );
+
+    // Example: is_subset
+    let small = HashSet::from([2, 3]);
+    let large = HashSet::from([1, 2, 3, 4]);
+    println!(
+        "Is {:?} subset of {:?}? {}",
+        small,
+        large,
+        is_subset(&small, &large)
+    );
+}
